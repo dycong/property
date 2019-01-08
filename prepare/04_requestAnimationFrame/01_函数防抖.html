@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数防抖测试</title>
+</head>
+<body>
+<input type="text" id="user_input">&nbsp;
+<button id="btn">搜索</button>
+<script type="text/javascript">
+  
+  /*
+  * 函数防抖：
+  *   概念： 延迟要执行的动作，若在延时的这段时间内，再次出发，则取消之前开启的动作，重新计时。
+  *   举例：电梯进人之后，延时5秒启动，这5秒钟之内如果在进来人，不计算之前的，重新计时5秒。
+  *   实现： 定时器
+  *   应用：搜索时等用户完整输入内容后再发送查询请求.
+  * */
+
+  var userInput = document.getElementById('user_input');
+  var timeId
+  userInput.addEventListener('keyup',function () {
+    //清除上一次的定时器
+    if(timeId){
+      clearTimeout(timeId)
+    }
+    timeId = setTimeout(function () {
+      senAjax(userInput.value)
+    },500)
+  })
+  //模拟发送ajax请求
+  function senAjax(data) {
+    console.log('send ajax -------------'+data);
+  }
+</script>
+</body>
+</html>
